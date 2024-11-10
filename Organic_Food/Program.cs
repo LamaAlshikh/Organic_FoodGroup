@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Organic_Food.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<Organic_FoodContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Organic_FoodContext") ?? throw new InvalidOperationException("Connection string 'Organic_FoodContext' not found.")));
 
 var app = builder.Build();
 
